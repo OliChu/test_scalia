@@ -9,6 +9,8 @@ gem 'puma'
 gem 'rails', '5.0.5'
 gem 'redis'
 gem 'webpacker', '~> 3.0'
+gem 'remotipart', github: 'mshibuya/remotipart'
+gem 'rails_admin', '>= 1.0.0.rc'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
