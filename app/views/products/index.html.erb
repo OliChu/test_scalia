@@ -1,3 +1,70 @@
+<div id="demo">
+  <form id="search">
+    Search <input name="query" v-model="searchQuery">
+  </form>
+  <products-grid
+    :data="gridData"
+    :columns="gridColumns"
+    :filter-key="searchQuery">
+  </products-grid>
+</div>
+
+<script type="text/x-template" id="grid-template">
+  <table>
+    <thead>
+      <tr>
+        <th v-for="key in columns"
+          @click="sortBy(key)"
+          :class="{ active: sortKey == key }">
+          {{ key | capitalize }}
+          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="entry in filteredData">
+        <td v-for="key in columns">
+          {{entry[key]}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</script>
+
+<%= javascript_pack_tag 'grid_template' %>
+
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="wrapper">
+      <h1>Products</h1>
+      <div id="products-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="product in products">
+              <td>{{ product.title }}</td>
+              <td>{{ product.description }}</td>
+              <td>{{ product.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!--
+<%= javascript_pack_tag 'products' %>
+
+ -->
+<!--
 <div class="container">
   <div class="row">
     <div class="wrapper">
@@ -5,10 +72,10 @@
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th>Title<%# sort_link "title" %></th>
-            <th>Description<%# sort_link "title" %></th>
-            <th>Owner<%# sort_link "title" %></th>
-            <th>Price<%# sort_link "price" %></th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Owner</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody>
@@ -31,3 +98,4 @@
     </div>
   </div>
 </div>
+ -->
