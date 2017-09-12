@@ -70,14 +70,9 @@ var demo = new Vue({
     gridColumns: ['title', 'description', 'price'],
     gridData: []
   },
-  ready: function() {
-    var that;
-    that = this;
-    $.ajax({
-      url: '/products.json',
-      success: function(res) {
-        that.gridData = res;
-      }
-    });
+  mounted: function(){
+    $.get('http://localhost:3000/products.json', function(data){
+    v.gridData = data;
+  })
   }
 });
