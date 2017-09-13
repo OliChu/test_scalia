@@ -1,6 +1,6 @@
 import Vue from 'vue/dist/vue.esm'
-// import gridData from 'products.json'
 
+// Grid with sortable columns and arrows
 Vue.component('products-grid', {
   template: '#grid-template',
   props: {
@@ -54,25 +54,16 @@ Vue.component('products-grid', {
   }
 })
 
-// bootstrap the products
+// Retrieve data from products_controllers through content_div
+const element = document.getElementById("products-data")
+const products_rails = JSON.parse(element.dataset.products)
+
+// Retrieve data from products_controllers through content_div
 var demo = new Vue({
-  el: '#demo',
+  el: '#products-grid',
   data: {
     searchQuery: '',
-  //   gridColumns: ['name', 'power'],
-  //   gridData: [
-  //     { name: 'Chuck Norris', power: Infinity },
-  //     { name: 'Bruce Lee', power: 9000 },
-  //     { name: 'Jackie Chan', power: 7000 },
-  //     { name: 'Jet Li', power: 8000 }
-  //   ]
-  // },
     gridColumns: ['title', 'description', 'price'],
-    gridData: []
-  },
-  mounted: function(){
-    $.get('http://localhost:3000/products.json', function(data){
-    v.gridData = data;
-  })
+    gridData: products_rails
   }
 });

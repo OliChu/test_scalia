@@ -1,14 +1,29 @@
-<div id="demo">
-  <form id="search">
-    Search <input name="query" v-model="searchQuery">
-  </form>
-  <products-grid
-    :data="gridData"
-    :columns="gridColumns"
-    :filter-key="searchQuery">
-  </products-grid>
+<!-- Storing data from controller to JSON -->
+<%= content_tag :div,
+    id: "products-data",
+    data: {
+        products: @products.to_json,
+    } do %>
+
+<% end %>
+
+<!-- Grid Template with Sortable columns -->
+<div class="container">
+  <div class="row">
+    <div id="products-grid">
+      <form id="search">
+        <input name="query" v-model="searchQuery" placeholder="Search">
+      </form>
+      <products-grid
+        :data="gridData"
+        :columns="gridColumns"
+        :filter-key="searchQuery">
+      </products-grid>
+    </div>
+  </div>
 </div>
 
+<!-- Grid Template with Sortable columns -->
 <script type="text/x-template" id="grid-template">
   <table>
     <thead>
@@ -32,70 +47,5 @@
   </table>
 </script>
 
+<!-- Loading the VueJS component grid_template -->
 <%= javascript_pack_tag 'grid_template' %>
-
-
-<!-- <div class="container">
-  <div class="row">
-    <div class="wrapper">
-      <h1>Products</h1>
-      <div id="products-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="product in products">
-              <td>{{ product.title }}</td>
-              <td>{{ product.description }}</td>
-              <td>{{ product.price }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!--
-<%= javascript_pack_tag 'products' %>
-
- -->
-<!--
-<div class="container">
-  <div class="row">
-    <div class="wrapper">
-      <h1>Products</h1>
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Owner</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @products.each do |product| %>
-            <tr>
-              <td><%= product.title %></td>
-              <td>
-                <%= product.description %>
-                <% if current_user && current_user == product.user %>
-                  <%= link_to 'Edit', edit_product_path(product) %>
-
-                <% end %>
-              </td>
-              <td><%= product.user.email.gsub(/@\w*.\w*/, '').gsub('.', ' ').titleize %></td>
-              <td><%= product.price %>€</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
- -->
