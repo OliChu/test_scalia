@@ -78,6 +78,16 @@ const grid = new Vue({
         this.gridData = products_rails.slice(this.startRow, this.startRow + this.rowsPerPage)
       }
     },
+    firstPage: function() {
+      this.startRow = 0
+      this.gridData = products_rails.slice(0, this.rowsPerPage)
+    },
+    lastPage: function() {
+      this.startRow = Math.floor(this.productsNumber/this.rowsPerPage)*this.rowsPerPage - this.rowsPerPage
+      console.log(this.startRow)
+      console.log(this.rowsPerPage)
+      this.gridData = products_rails.slice(this.startRow, this.startRow + this.rowsPerPage)
+    },
     tenRows: function() {
       this.startRow = 0
       this.rowsPerPage = 10;
