@@ -58,12 +58,46 @@ Vue.component('products-grid', {
 const element = document.getElementById("products-data")
 const products_rails = JSON.parse(element.dataset.products)
 
-// Retrieve data from products_controllers through content_div
-var demo = new Vue({
+// Grid component design and functions
+const grid = new Vue({
   el: '#products-grid',
   data: {
     searchQuery: '',
-    gridColumns: ['title', 'description', 'price'],
-    gridData: products_rails
+    gridColumns: ['id', 'title', 'description', 'price'],
+    startRow: 0,
+    rowsPerPage: 10,
+    productsNumber: products_rails.length,
+    gridData: products_rails.slice(0, 10)
+  },
+  methods: {
+    movePages: function(amount) {
+      const newStartRow = this.startRow + (amount * this.rowsPerPage);
+      if (newStartRow >= 0 && newStartRow < products_rails.length) {
+        this.startRow = newStartRow;
+        console.log(products_rails.slice(this.startRow, this.startRow + this.rowsPerPage))
+        this.gridData = products_rails.slice(this.startRow, this.startRow + this.rowsPerPage)
+      }
+    },
+    tenRows: function() {
+      this.startRow = 0
+      this.rowsPerPage = 10;
+      this.gridData = products_rails.slice(0, this.rowsPerPage)
+    },
+    twentyRows: function() {
+      this.startRow = 0
+      this.rowsPerPage = 20;
+      this.gridData = products_rails.slice(0, this.rowsPerPage)
+    },
+    fiftyRows: function() {
+      this.startRow = 0
+      this.rowsPerPage = 50;
+      this.gridData = products_rails.slice(0, this.rowsPerPage)
+    },
+    hundredRows: function() {
+      this.startRow = 0
+      this.rowsPerPage = 100;
+      this.gridData = products_rails.slice(0, this.rowsPerPage)
+    }
   }
 });
+
