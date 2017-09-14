@@ -8,6 +8,9 @@
   <div class="navbar-right">
     <% if user_signed_in? %>
       <!-- Links when logged in -->
+      <% if current_user.admin == true %>
+        <%= link_to "Admin Dashboard", rails_admin_path, class: "navbar-item navbar-link" %>
+      <% end %>
       <%= link_to "Add Product", new_product_path, class: "navbar-item navbar-link" %>
       <%= link_to destroy_user_session_path, class: "navbar-item navbar-link", method: :delete do %>
         <%= t(".sign_out", default: "Log out") %>
