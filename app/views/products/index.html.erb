@@ -7,13 +7,25 @@
 
 <% end %>
 
-<!-- Grid Template with Sortable columns -->
+<!-- HTML Grid displaying products -->
 <div class="container">
   <div class="row">
     <div id="products-grid">
       <form id="search">
         <input name="query" v-model="searchQuery" placeholder="Search">
       </form>
+      <div id="page-navigation">
+        <button @click=movePages(-1)>Back</button>
+        <p>{{startRow / rowsPerPage + 1}} out of {{Math.ceil(productsNumber / rowsPerPage)}}</p>
+        <!-- <p>{{startRow / rowsPerPage + 1}} out of {{gridData.length / rowsPerPage}}</p> -->
+        <button @click=movePages(1)>Next</button>
+      </div>
+      <div id="number">
+        <button @click=tenRows>10</button>
+        <button @click=twentyRows>20</button>
+        <button @click=fiftyRows>50</button>
+        <button @click=hundredRows>100</button>
+      </div>
       <products-grid
         :data="gridData"
         :columns="gridColumns"
